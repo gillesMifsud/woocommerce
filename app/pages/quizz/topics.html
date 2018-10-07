@@ -1,0 +1,31 @@
+<ion-header>
+ <ion-navbar primary>
+   <button menuToggle>
+     <ion-icon name="menu"></ion-icon>
+   </button>
+   <ion-title text-center>
+       <img text-center src="img/logoLuenceTransparentHeader.png" style="max-height: 55px; padding: 5px;">
+   </ion-title>
+ </ion-navbar>
+</ion-header>
+
+<ion-content padding class="topics">
+
+  <ion-list class="maxWidth">
+
+    <ion-list-header>
+      <h3 primary text-center>
+        <ion-icon name="help-circle"></ion-icon> Thèmes Quizz</h3>
+    </ion-list-header>
+
+    <ion-item *ngFor="let topic of topics" (click)="startQuizz(topic)">
+      <ion-avatar item-left>
+        <img [src]="topic.icon" alt="">
+      </ion-avatar>
+      <b courant>{{topic.title}}</b>
+      <em courant>{{topic.description}}</em>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>

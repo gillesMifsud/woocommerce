@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-navbar primary>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title text-center>
+      <img text-center src="img/logoLuenceTransparentHeader.png" style="max-height: 55px; padding: 5px;">
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="login">
+
+  <div class="maxWidth">
+
+    <br/>
+
+    <h2 text-center primary text-uppercase>
+      <ion-icon name="log-in"></ion-icon> Connexion</h2>
+      <form 
+        [formGroup]="loginForm" 
+        (submit)="login(username, password)" style="padding-top: 50px">
+        <ion-list>
+          <ion-item>
+            <ion-label>Username / Email</ion-label>
+            <ion-input type="text" [(formControl)]="username" value=""></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Mot de passe</ion-label>
+            <ion-input type="password" [(formControl)]="password" value=""></ion-input>
+          </ion-item>
+          <!-- <ion-item>
+          <ion-label stacked-label>Se souvenir de moi</ion-label>
+          <ion-checkbox dark [(ngModel)]="rememberMe"></ion-checkbox>
+        </ion-item> -->
+      </ion-list>
+      <button block padding type="submit" [disabled]="!loginForm.valid">CONNEXION</button>
+    </form>
+
+    <!-- Display div if response.error is true -->
+    <div [hidden]="!response?.error">
+      <p class="error-box">
+        Identifiants / Mot de passe incorrects!
+      </p>
+    </div>
+
+    <!-- <p><b>Response Status: </b>{{ response?.status | json}}</p>
+    <p><b>Cookie: </b>{{ response?.cookie | json}}</p>
+    <p><b>UserId: </b>{{ response?.user?.id | json}}</p> -->
+    <!-- <p>Response: {{ response | json}}</p> -->
+    <!-- <button block (click)="alreadyLogged()">Already logged</button> -->
+    <br />
+    <div>
+      <p text-center courant>Pas encore de compte?</p>
+      <button padding block (click)="goToRegisterPage()">S'ENREGISTRER</button>
+    </div>
+    <!-- <button block (click)="getTimeNow()">GET TIME TEST</button> -->
+  </div>
+</ion-content>

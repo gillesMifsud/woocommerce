@@ -1,0 +1,194 @@
+<ion-header>
+ <ion-navbar primary>
+   <button menuToggle>
+     <ion-icon name="menu"></ion-icon>
+   </button>
+   <ion-title text-center>
+       <img text-center src="img/logoLuenceTransparentHeader.png" style="max-height: 55px; padding: 5px;">
+   </ion-title>
+ </ion-navbar>
+</ion-header>
+
+<ion-content padding class="register">
+
+  <form 
+    [ngFormModel]="registerForm" 
+    (submit)="onSubmit(registerForm.value)">
+    <ion-list class="maxWidth">
+      <ion-list-header>
+        <h3 text-center primary text-uppercase>
+          <ion-icon name="person-add"></ion-icon> Enregistrement</h3>
+      </ion-list-header>
+      <!-- Username -->
+      <ion-item>
+        <ion-label [class.error-star]="!username.valid && username.touched">
+          *Nom d'utilisateur</ion-label>
+        <ion-input [formControl]="username" type="text" value=""></ion-input>
+      </ion-item>
+      <!-- Erreurs -->
+      <div>
+        <em padding *ngIf="username.hasError('required') && username.touched"
+          class="error-box">
+          * Champ requis!
+        </em>
+        <em padding *ngIf="username.hasError('minlength') && username.touched"
+          class="error-box">
+          * Le nom d'utilisateur doit comporter au moins 8 caractères!
+        </em>
+      </div>
+      <!-- Email -->
+      <ion-item>
+        <ion-label [class.error-star]="!email.valid && email.touched">
+          *Email</ion-label>
+        <ion-input [formControl]="email" type="text" value=""></ion-input>
+      </ion-item>
+      <!-- Erreurs -->
+      <div>
+        <em padding *ngIf="email.hasError('required') && email.touched"
+          class="error-box">
+          * Champ requis!
+        </em>
+        <em padding *ngIf="email.hasError('minlength') && email.touched"
+          class="error-box">
+          * Email invalide!
+        </em>
+      </div>
+      <!-- Password -->
+      <ion-item>
+        <ion-label [class.error-star]="!password.valid && password.touched">
+          *Mot de passe</ion-label>
+        <ion-input [formControl]="password" type="text" value=""></ion-input>
+      </ion-item>
+      <!-- Erreurs -->
+      <div>
+        <em padding *ngIf="password.hasError('required') && password.touched"
+          class="error-box">
+          * Champ requis!
+        </em>
+        <em padding *ngIf="password.hasError('minlength') && password.touched"
+          class="error-box">
+          * Mot de passe invalide!
+        </em>
+      </div>
+      <!-- Password confirm -->
+      <ion-item>
+        <ion-label [class.error-star]="!password_confirmed.valid && password_confirmed.touched">
+          *Confirmer mot de passe</ion-label>
+        <ion-input [formControl]="password_confirmed" type="text" value=""></ion-input>
+      </ion-item>
+      <!-- Erreurs -->
+      <div>
+        <em padding *ngIf="password_confirmed.hasError('required') && password_confirmed.touched"
+          class="error-box">
+          * Champ requis!
+        </em>
+        <em padding *ngIf="password_confirmed.hasError('minlength') && password_confirmed.touched"
+          class="error-box">
+          * Mot de passe invalide!
+        </em>
+      </div>
+      <!-- Last name -->
+      <ion-item>
+        <ion-label [class.error-star]="!last_name.valid && last_name.touched">
+          *Nom</ion-label>
+        <ion-input [formControl]="last_name" type="text" value=""></ion-input>
+      </ion-item>
+      <!-- Erreurs -->
+      <div>
+        <em padding *ngIf="last_name.hasError('required') && last_name.touched"
+          class="error-box">
+          * Champ requis!
+        </em>
+        <em padding *ngIf="last_name.hasError('minlength') && last_name.touched"
+          class="error-box">
+          * Nom trop court!
+        </em>
+      </div>
+      <!-- First name not required-->
+      <ion-item>
+        <ion-label [class.error-star]="!first_name.valid">
+          Prénom</ion-label>
+        <ion-input [formControl]="first_name" type="text" value=""></ion-input>
+      </ion-item>
+      <!-- Erreurs -->
+      <div>
+        <em padding *ngIf="first_name.hasError('minlength')"
+          class="error-box">
+          * Prénom trop court!
+        </em>
+      </div>
+      <!-- Phone -->
+      <ion-item>
+        <ion-label [class.error-star]="!phone.valid">
+          Téléphone</ion-label>
+        <ion-input [formControl]="phone" type="text" value=""></ion-input>
+      </ion-item>
+      <!-- Erreurs -->
+      <div>
+        <em padding *ngIf="phone.hasError('minlength')"
+          class="error-box">
+          * Téléphone trop court!
+        </em>
+        <!-- TODO: Invalide != number -->
+      </div>
+      <!-- Address -->
+      <ion-item>
+        <ion-label [class.error-star]="!address_1.valid && address_1.touched">
+          *Adresse</ion-label>
+        <ion-input [formControl]="address_1" type="text" value=""></ion-input>
+      </ion-item>
+      <!-- Erreurs -->
+      <div>
+        <em padding *ngIf="address_1.hasError('required') && address_1.touched"
+          class="error-box">
+          * Champ requis!
+        </em>
+        <em padding *ngIf="address_1.hasError('minlength') && address_1.touched"
+          class="error-box">
+          * Adresse trop courte!
+        </em>
+      </div>
+      <!-- Postcode -->
+      <ion-item>
+        <ion-label [class.error-star]="!postcode.valid && postcode.touched">
+          *Code Postal</ion-label>
+        <ion-input [formControl]="postcode" type="text" value=""></ion-input>
+      </ion-item>
+      <!-- Erreurs -->
+      <div>
+        <em padding *ngIf="postcode.hasError('required') && postcode.touched"
+          class="error-box">
+          * Champ requis!
+        </em>
+        <em padding *ngIf="postcode.hasError('minlength') && postcode.touched"
+          class="error-box">
+          * Code postal trop courte!
+        </em>
+        <!-- TODO: Invalide != number -->
+      </div>
+      <!-- City -->
+      <ion-item>
+        <ion-label [class.error-star]="!city.valid && city.touched">
+          *Ville</ion-label>
+        <ion-input [formControl]="city" type="text" value=""></ion-input>
+      </ion-item>
+      <!-- Erreurs -->
+      <div>
+        <em padding *ngIf="city.hasError('required') && city.touched"
+          class="error-box">
+          * Champ requis!
+        </em>
+        <em padding *ngIf="city.hasError('minlength') && city.touched"
+          class="error-box">
+          * Ville trop courte!
+        </em>
+      </div>
+      <p>
+        <em secondary>* : champs obligatoires</em>
+      </p>
+      <div>
+        <button block type="submit" [disabled]="!registerForm.valid">VALIDER</button>
+      </div>
+    </ion-list>
+  </form>
+</ion-content>

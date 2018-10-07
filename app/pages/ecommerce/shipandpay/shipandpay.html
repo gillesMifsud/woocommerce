@@ -1,0 +1,124 @@
+<ion-header>
+ <ion-navbar primary>
+   <button menuToggle>
+     <ion-icon name="menu"></ion-icon>
+   </button>
+   <ion-title text-center>
+       <img text-center src="img/logoLuenceTransparentHeader.png" style="max-height: 55px; padding: 5px;">
+   </ion-title>
+   <ion-buttons end>
+     <button (click)="openBasket()">
+       <ion-icon name="md-basket"></ion-icon>
+       <ion-badge>{{totalItems}}</ion-badge>
+     </button>
+   </ion-buttons>
+ </ion-navbar>
+</ion-header>
+
+<ion-content padding class="shipandpay">
+
+  <ion-list [hidden]="validateOrder" class="maxWidth">
+
+    <ion-list-header text-center>
+      <h2 primary text-center text-uppercase>
+        <ion-icon name="map"></ion-icon> Livraison</h2>
+      <p secondary>{{response?.username}}</p>
+        <!-- IdUser N°{{response?.id}} -->
+    </ion-list-header>
+
+    <ion-item>
+      <h2>Coordonnées: {{response?.last_name}} {{response?.first_name}}</h2>
+      <p>{{response?.email}}</p>
+    </ion-item>
+
+    <ion-item [hidden]="!response?.shipping_address?.company">
+      <h2>Société:</h2>
+      <p>{{response?.shipping_address?.company}}</p>
+    </ion-item>
+
+    <ion-item>
+      <h2>Adresse de livraison:</h2>
+      <p>{{response?.shipping_address?.address_1}}</p>
+      <p>{{response?.shipping_address?.postcode}}</p>
+      <p>{{response?.shipping_address?.city}}</p>
+    </ion-item>
+
+    <br />
+
+    <ion-row>
+      <button small class="customerButton" (click)="openModifyCustomer(response?.email)">Modifier</button>
+
+      <button small class="customerButton"
+        (click)="validateAndPay(
+        response?.first_name,
+        response?.last_name,
+        response?.shipping_address?.address_1,
+        response?.shipping_address?.city,
+        response?.shipping_address?.postcode,
+        response?.email,
+        response?.id)">Valider et payer</button>
+    </ion-row>
+
+    <!-- <button block danger (click)="dataBuilder()">LINEITEMS</button> -->
+    <!-- <p>{{response | json}}</p> -->
+
+    <ion-item style="margin:0 auto">
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+        <input type="hidden" name="cmd" value="_xclick">
+        <input type="hidden" name="business" value="gil_mifsud@yahoo.fr">
+        <input type="hidden" name="lc" value="US">
+        <input type="hidden" name="button_subtype" value="services">
+        <input type="hidden" name="no_note" value="0">
+        <input type="hidden" name="currency_code" value="EUR">
+        <input type="hidden" name="tax_rate" value="19.600">
+        <input type="hidden" name="shipping" value="10.00">
+        <input type="hidden" name="bn" value="PP-BuyNowBF:btn_paynowCC_LG.gif:NonHostedGuest">
+        <input type="image" src="https://www.paypalobjects.com/fr_XC/i/btn/btn_paynowCC_LG.gif" border="0" name="submit" alt="PayPal - la solution de paiement en ligne la plus simple et la plus sécurisée !">
+        <img class="customerButton" alt="" border="0" src="https://www.paypalobjects.com/fr_XC/i/scr/pixel.gif" width="1" height="1">
+      </form>
+    </ion-item>
+
+  </ion-list>
+
+<!--  Hidden validate order-->
+  <ion-list [hidden]="!response?.order?.order_number" class="maxWidth">
+
+    <ion-list-header text-center>
+      <h3 primary text-center text-uppercase>
+        <ion-icon name="checkmark"></ion-icon> Commande validée
+      </h3>
+    </ion-list-header>
+
+    <ion-item>
+      <h3 courant>Votre commande N° 
+        <b bluegray>{{response?.order?.order_number}}</b> a bien été enregistrée.
+      </h3>
+      <p>Elle sera traitée dans les plus brefs délais.</p>
+      <!--<p>{{response | json}}</p>-->
+    </ion-item>
+
+    <ion-item>
+      <h4>Email de contact: {{response?.order?.billing_address?.email}}</h4>
+      <br>
+      <h4>Adresse de Livraison:</h4>
+      <p>
+        <b>{{response?.order?.shipping_address?.first_name}} {{response?.order?.shipping_address?.last_name}}</b>
+      </p>
+      <p *ngIf="response?.order?.shipping_address?.company">
+        Société {{response?.order?.shipping_address?.company}}
+      </p>
+      <p>
+        {{response?.order?.shipping_address?.address_1}}
+        {{response?.order?.shipping_address?.postcode}} {{response?.order?.shipping_address?.city}}
+      </p>
+    </ion-item>
+
+  </ion-list>
+
+  <div [hidden]="!response?.order?.order_number" class="maxWidth">
+    <br>
+    <button primary block (click)="goToAccount()">Aller à mon compte</button>  
+    <button primary block (click)="goToHome()">Retour à l'accueil</button> 
+  </div> 
+  
+</ion-content>

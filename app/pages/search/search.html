@@ -1,0 +1,40 @@
+<ion-header>
+ <ion-navbar primary>
+   <button menuToggle>
+     <ion-icon name="menu"></ion-icon>
+   </button>
+   <ion-title text-center>
+       <img text-center src="img/logoLuenceTransparentHeader.png" style="max-height: 55px; padding: 5px;">
+   </ion-title>
+ </ion-navbar>
+</ion-header>
+
+<ion-content class="search">
+
+    <ion-searchbar [(ngModel)]="keyword"
+                   (keyup)="keyHasBeenPressed($event)"
+                   (cancel)="userPressedCancel()">
+    </ion-searchbar>
+
+    <ion-list>
+    <!-- Pipe into filterByType and use the "usesFilter" property as argument. Uses filter is either null or 'song' or 'featured-movie' when we filter in the actionsheet  -->
+    <ion-item *ngFor="let result of results">
+
+        <ion-thumbnail item-left>
+        <img [src]="result.artworkUrl100">
+
+        </ion-thumbnail>
+
+        <h2 [innerText]="result.trackName"></h2>
+
+        <p>{{result.artistName}}<span *ngIf="result.kind==='song'"> - {{result.trackCount}} tracks</span></p>
+
+        <!--Display different icon depending on type reslut-->
+        <ion-icon item-right
+              [name]="result.kind==='song' ? 'musical-notes' : 'film'" ></ion-icon>
+
+        <ion-icon item-right name="person" [hidden]="result.kind !== 'song'"></ion-icon>
+
+    </ion-item>
+  </ion-list>
+</ion-content>

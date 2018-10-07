@@ -1,0 +1,68 @@
+<ion-header>
+ <ion-navbar primary>
+   <button menuToggle>
+     <ion-icon name="menu"></ion-icon>
+   </button>
+   <ion-title text-center>
+       <img text-center src="img/logoLuenceTransparentHeader.png" style="max-height: 55px; padding: 5px;">
+   </ion-title>
+   <ion-buttons end>
+     <button (click)="openBasket()">
+       <ion-icon name="md-basket"></ion-icon>
+       <ion-badge>{{totalItems}}</ion-badge>
+     </button>
+   </ion-buttons>
+ </ion-navbar>
+</ion-header>
+
+<ion-content padding class="wooorder">
+
+  <ion-list class="maxWidth">
+
+    <ion-list-header text-center>
+      <h3 primary text-center text-uppercase>
+        <ion-icon name="checkmark"></ion-icon> Valider ma Commande
+      </h3>
+    </ion-list-header>
+
+    <ion-item ion-item *ngFor="let item of basketItems">
+
+      <ion-avatar item-left>
+        <img src="{{item.articlePicture}}"/>
+      </ion-avatar>
+
+      <p bluegray><b>{{item.articleName}}</b></p>
+
+      <br />
+
+      <div class="row">
+          <p class="rowDetail">Quantité:
+            <b>{{item.quantity}}</b>
+          </p>
+          <b primary> x </b>
+          <p class="rowDetail">Prix:
+            <b>{{item.articlePrice}} €</b>
+          </p>
+          <span primary> = </span>
+          <p class="rowDetail">Total ligne:
+            <b>{{item.articlePrice*item.quantity}}</b>
+          </p>
+      </div>
+
+    </ion-item>
+
+    <ion-item>
+      <p primary>Frais de Livraison: <b courant>{{forfait}} € (forfait)</b></p>
+    </ion-item>
+
+    <ion-item>
+      <p primary>Total de la commande: <b courant>{{forfait+totalReturn}} €</b></p>
+    </ion-item>
+
+    <br />
+
+    <button padding block (click)="goToShipAndPay()">Livraison & Paiement</button>
+
+  </ion-list>
+
+</ion-content>

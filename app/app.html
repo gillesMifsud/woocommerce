@@ -1,0 +1,72 @@
+<!-- logged out menu -->
+<ion-menu id="loggedOutMenu" [content]="content" *ngIf="!loggedIn">
+
+  <ion-toolbar primary>
+  <ion-title text-uppercase text-center>Menu</ion-title>
+  </ion-toolbar>
+
+  <ion-content class="outer-content" style="background-color: light;">
+
+    <ion-list>
+      <ion-list-header>
+        Navigation
+      </ion-list-header>
+      <button ion-item menuClose *ngFor="let p of appPages" (click)="openPage(p)">
+        <ion-icon item-left bluegray [name]="p.icon"></ion-icon>
+        {{p.title}}
+      </button>
+    </ion-list>
+
+    <ion-list>
+      <ion-list-header>
+        Compte
+      </ion-list-header>
+      <button ion-item menuClose *ngFor="let p of loggedOutPages" (click)="openPage(p)">
+        <ion-icon item-left bluegray [name]="p.icon"></ion-icon>
+        {{p.title}}
+      </button>
+    </ion-list>
+  </ion-content>
+
+</ion-menu>
+
+<!-- logged in menu -->
+<ion-menu id="loggedInMenu" [content]="content" *ngIf="loggedIn">
+
+  <ion-toolbar primary>
+    <ion-title text-uppercase text-center>Menu</ion-title>
+  </ion-toolbar>
+
+  <ion-content class="outer-content">
+
+    <ion-list>
+      <ion-list-header>
+        Navigation
+      </ion-list-header>
+      <button ion-item menuClose *ngFor="let p of appPages" (click)="openPage(p)">
+        <ion-icon item-left bluegray [name]="p.icon"></ion-icon>
+        {{p.title}}
+      </button>
+    </ion-list>
+
+    <ion-list>
+      <ion-list-header>
+        Compte
+      </ion-list-header>
+      <button ion-item menuClose *ngFor="let p of loggedInPages" (click)="openPage(p)">
+        <ion-icon item-left bluegray [name]="p.icon"></ion-icon>
+        {{p.title}}
+      </button>
+      <button ion-item menuToggle (click)="logout()">
+        <ion-icon item-left bluegray name="md-log-out"></ion-icon>
+        Deconnexion
+      </button>
+    </ion-list>
+
+  </ion-content>
+
+</ion-menu>
+
+
+<!-- main navigation -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

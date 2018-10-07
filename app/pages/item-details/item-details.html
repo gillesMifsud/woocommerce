@@ -1,0 +1,33 @@
+<ion-header>
+ <ion-navbar primary>
+   <button menuToggle>
+     <ion-icon name="menu"></ion-icon>
+   </button>
+   <ion-title text-center>
+       <img text-center src="img/logoLuenceTransparentHeader.png" style="max-height: 55px; padding: 5px;">
+   </ion-title>
+ </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+   <div *ngIf="selectedItem" class="selection">
+
+    <ion-card class="maxWidth">
+      <img src="{{selectedItem.image}}"/>
+
+      <ion-card-content>
+        <ion-card-title>
+          <ion-avatar>
+            <img src="img/icons/{{selectedItem.icon}}.png" style="height:40px; width:40px;"/>
+            <b bluegray>{{selectedItem.title}}</b>
+          </ion-avatar>
+
+          </ion-card-title>
+        <p text-justify>
+          {{selectedItem.detail}}
+        </p>
+      </ion-card-content>
+    </ion-card>
+
+  </div>
+</ion-content>

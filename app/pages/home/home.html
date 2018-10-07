@@ -1,0 +1,59 @@
+<ion-header>
+ <ion-navbar primary>
+   <button menuToggle>
+     <ion-icon name="menu"></ion-icon>
+   </button>
+   <ion-title text-center>
+       <img text-center src="img/logoLuenceTransparentHeader.png" style="max-height: 55px; padding: 5px;">
+   </ion-title>
+   <!-- <ion-buttons end [hidden]="!loggedIn">
+     <button (click)="openBasket()">
+       <ion-icon name="md-basket"></ion-icon>
+       <ion-badge>{{totalItems}}</ion-badge>
+     </button>
+   </ion-buttons> -->
+ </ion-navbar>
+</ion-header>
+
+<ion-content padding class="home">
+  <div class="maxWidth">
+
+    <br />
+    <h1 text-center primary text-uppercase>Luence, Agence Web</h1>
+    <h4 text-center bluegray><em>Nouvelle Génération & Adaptée</em></h4>
+    <br/>
+
+    <p text-justify courant>
+        Avec <b>15 ans d’expérience </b>dans les métiers du Web et
+        un parcours au sein de sociétés informatiques nationales,
+        les fondateurs de <span primary>Luence</span> ont souhaité apporter leurs expériences
+        dans le secteur du travail protégé.
+    </p>
+
+    <!-- <ion-slides pager>
+      <ion-slide>
+        <img src="img/graphic_responsive.svg"/>
+      </ion-slide>
+      <ion-slide>
+        <img src="img/luence_ecrans.jpg"/>
+      </ion-slide>
+      <ion-slide>
+        <img src="img/luence_bureau.png"/>
+      </ion-slide>
+    </ion-slides> -->
+    <img id="slidesRes" src="img/graphic_responsive.svg"/>
+
+    <p text-justify courant>
+      <span bluegray>LUENCE</span> est aujourd’hui la première agence web d’ingénierie reconnue entreprise adaptée sur le grand-est.
+    </p>
+
+    <p text-center text-uppercase><b>Pour plus d'informations, contactez-nous:</b></p>
+
+    <div style="width:70%; margin: 0 auto">
+      <button block primary (click)="goToContactPage();">Formulaire</button>
+      <button block primary (click)="goToAboutPage();">Coordonnées</button>
+    </div>
+
+  </div>
+
+</ion-content>

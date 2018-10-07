@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-navbar primary>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title text-center>
+      <img text-center src="img/logoLuenceTransparentHeader.png" style="max-height: 55px; padding: 5px;">
+    </ion-title>
+    <ion-buttons end>
+      <button (click)="openBasket()">
+        <ion-icon name="md-basket"></ion-icon>
+        <ion-badge>{{totalItems}}</ion-badge>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="woodetail">
+
+  <div class="maxWidth">
+
+    <ion-card>
+
+      <div class="divImg">
+        <img class="imgDemi" src="{{selectedItem.images[0].src}}"/>
+        <img class="imgDemi" src="{{selectedItem.images[1].src}}"/>
+      </div>
+
+      <ion-card-header>
+        <!-- <img src="{{selectedItem.images[0].src}}"/> -->
+        <h2 text-center class="cardHeaderText">{{selectedItem.title}}</h2>
+        <h3 text-center>
+          <span item-left><em courant>N°Article: {{selectedItem.id}}</em></span>
+          <span item-right>Prix: <b>{{selectedItem.price}} €</b></span>
+        </h3>
+      </ion-card-header>
+
+      <ion-item class="centered">
+        <!-- Buttons & Quantités -->
+          <p class="textQuantity" primary>Quantité: <b>{{quantity}}</b></p>
+          <div style="float:right; margin:0">
+            <button class="addButton" (click)="addQuantity()"><ion-icon name="md-add"></ion-icon></button>
+            <button class="addButton" (click)="minusQuantity()"><ion-icon name="md-remove"></ion-icon></button>
+          </div>
+      </ion-item>
+
+
+      <button block primary class="orderButton"
+        (click)="addToBasket(
+        selectedItem.id,
+        quantity,
+        selectedItem.title,
+        selectedItem.images[0].src,
+        selectedItem.price)">
+      Ajouter au panier
+    </button>
+    <br />
+    <button block primary class="orderButton"
+      (click)="continueShop()">
+      Retour aux catégories
+    </button>
+
+    <br />
+
+    <ion-card-content>
+      <p text-justify courant [innerHTML]="selectedItem.description"></p>
+
+      <ion-slides pager>
+        <ion-slide *ngFor="let i of selectedItem.images">
+          <img src="{{i.src}}"/>
+        </ion-slide>
+      </ion-slides>
+
+      <br />
+
+      <p text-left primary>Tags: {{selectedItem.tags}}</p>
+      <p text-left primary>Catégories: {{selectedItem.categories}}</p>
+    </ion-card-content>
+
+  </ion-card>
+
+</div>
+
+</ion-content>

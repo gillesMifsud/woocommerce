@@ -1,0 +1,96 @@
+<ion-header>
+ <ion-navbar primary>
+   <button menuToggle>
+     <ion-icon name="menu"></ion-icon>
+   </button>
+   <ion-title text-center>
+       <img text-center src="img/logoLuenceTransparentHeader.png" style="max-height: 55px; padding: 5px;">
+   </ion-title>
+ </ion-navbar>
+</ion-header>
+
+<ion-content class="quizz-results.page">
+  <br />
+
+  <div  class="maxWidth">
+
+  <!-- if is perfect color green else red -->
+  <ion-card
+    [style.backgroundColor]="quizz.isPerfect() ? '#dff0d8' : '#f2dede'">
+    <ion-card-header>
+      <h2 text-uppercase>
+        Résultats du Quizz
+        <b>{{ quizz.title }}</b>
+      </h2>
+    </ion-card-header>
+    <!-- Score -->
+    <ion-card-content>
+      <p>
+        Votre score:
+        <span primary>{{ quizz.getScore() }}</span> / <b>{{ quizz.getGradingScale() }}</b>
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Exit & Restart -->
+  <div style="width:60%; margin: 0 auto" text-center>
+
+    <button large (click)="onHomeClicked($event)">
+      <ion-icon name="refresh-circle"></ion-icon>
+    </button>
+
+    <button large (click)="onGoHome($event)">
+      <ion-icon name="md-home"></ion-icon>
+    </button>
+
+    <button large menuToggle>
+        <ion-icon name="menu"></ion-icon>
+    </button>
+
+  </div>
+
+  <!-- Show Answers -->
+  <div [hidden]="!quizz.isPerfect()"
+    style="width:57%; margin: 0 auto" text-center>
+
+    <button block (click)="toggle()">
+      Voir les Réponses
+    </button>
+
+  </div>
+
+  <!-- Questions with answers click see answers -->
+  <div [hidden]="!visible">
+    <ion-card *ngFor="let i of quizz.items" style="background-color:aliceblue;">
+      <ion-card-header>
+        <b bluegray text-uppercase>Question: </b>
+      </ion-card-header>
+      <div courant padding>
+        {{ i.question }}
+      </div>
+      <ion-card-content>
+        <b bluegray text-uppercase>Réponse:</b>
+        <p courant text-justify>{{ i.answer }}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Questions with answers -->
+  <div [hidden]="quizz.isPerfect()">
+    <ion-card *ngFor="let i of quizz.items" style="background-color:aliceblue;">
+      <ion-card-header>
+        <b bluegray text-uppercase>Question: </b>
+      </ion-card-header>
+      <div courant padding>
+        {{ i.question }}
+      </div>
+      <ion-card-content>
+        <b bluegray text-uppercase>Réponse:</b>
+        <p courant text-justify>{{ i.answer }}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  </div>
+
+</ion-content>

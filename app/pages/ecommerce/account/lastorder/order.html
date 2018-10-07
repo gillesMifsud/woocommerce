@@ -1,0 +1,83 @@
+<ion-content padding class="customers">
+  <!-- <p>{{response | json}}</p> -->
+  <button padding (click)="close()">Fermer</button>
+
+  <ion-list [hidden]="!response">
+    <ion-list-header text-center>
+      <h2 primary>Commande N° {{response.id}}</h2>
+    </ion-list-header>
+
+    <ion-item>
+      <h3>Crée le: {{response.created_at | dateString:"dd/MM/yy"}}</h3>
+    </ion-item>
+
+    <ion-item>
+      <h3>Status: {{response.status}}</h3>
+    </ion-item>
+
+    <ion-item>
+      <h3 text-uppercase>Détail de la commande:</h3>
+      <br />
+      <div *ngFor="let commande of response.line_items">
+
+        <p bluegray>
+          <b>{{commande.name}} {{commande.price}} €</b>
+        </p>
+        <p courant>
+          Quantité:{{commande.quantity}}
+          Prix Total: {{commande.total}} €
+        </p>
+        <br />
+      </div>
+    </ion-item>
+
+    <ion-item>
+      <h3>Montant Total: {{response.total}} €</h3>
+      <p>Dont frais de port: {{response.total_shipping}} €</p>
+      <p>Par {{response.shipping_methods}}</p>
+    </ion-item>
+
+    <ion-item>
+      <h3>Moyen de paiement: {{response.payment_details?.method_title}}</h3>
+      <p>
+        Payé: {{response.payment_details?.paid}}
+      </p>
+    </ion-item>
+
+    <ion-item>
+      <h3>Adresse de facturation:</h3>
+      <p>
+        <b>{{response.billing_address?.first_name}} {{response.billing_address?.last_name}}</b>
+      </p>
+      <p>
+        Société {{response.billing_address?.first_name}}
+      </p>
+      <p>
+        {{response.billing_address?.address_1}}
+        {{response.billing_address?.postcode}} {{response.billing_address?.city}}
+      </p>
+      <p>
+        Email de contact: {{response.billing_address?.email}}
+      </p>
+      <p>
+        Téléphone: {{response.billing_address?.phone}}
+      </p>
+    </ion-item>
+
+    <ion-item>
+      <h3>Adresse de Livraison:</h3>
+      <p>
+        <b>{{response.shipping_address?.first_name}} {{response.shipping_address?.last_name}}</b>
+      </p>
+      <p>
+        Société {{response.shipping_address?.first_name}}
+      </p>
+      <p>
+        {{response.shipping_address?.address_1}}
+        {{response.shipping_address?.postcode}} {{response.shipping_address?.city}}
+      </p>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>

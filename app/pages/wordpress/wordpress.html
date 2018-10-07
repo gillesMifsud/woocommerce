@@ -1,0 +1,33 @@
+<ion-header>
+ <ion-navbar primary>
+   <button menuToggle>
+     <ion-icon name="menu"></ion-icon>
+   </button>
+   <ion-title text-center>
+       <img text-center src="img/logoLuenceTransparentHeader.png" style="max-height: 55px; padding: 5px;">
+   </ion-title>
+ </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h2 primary text-center text-uppercase>
+      <ion-icon name="list"></ion-icon> Blog
+  </h2>
+
+  <!-- Spinning icon when loading -->
+  <p bluegray text-center [hidden]="response">
+    Chargement...
+    <ion-spinner icon="spiral"></ion-spinner>
+  </p>
+
+  <ion-list padding *ngIf="response" class="maxWidth">
+    <button ion-item *ngFor="let obj of response"
+      (click)="toDetail($event, obj)">
+      <h2 text-left>
+        <b bluegray [innerHTML]="obj.title.rendered | safe"></b>
+      </h2>
+      <p text-left primary>{{ obj.date  | dateString:"MM/dd/yy"}}</p>
+    </button>
+  </ion-list>
+  
+</ion-content>

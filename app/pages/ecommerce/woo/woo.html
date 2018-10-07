@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-navbar primary>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title text-center>
+      <img text-center src="img/logoLuenceTransparentHeader.png" style="max-height: 55px; padding: 5px;">
+    </ion-title>
+    <ion-buttons end>
+      <button (click)="openBasket()">
+        <ion-icon name="md-basket"></ion-icon>
+        <ion-badge>{{totalItems}}</ion-badge>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="woo">
+
+  <ion-list class="maxWidth">
+
+    <ion-list-header>
+      <h3 text-center text-uppercase primary>
+        <ion-icon name="list"></ion-icon> Produits</h3>
+        <br />
+        <ion-searchbar [(ngModel)]="keyword"
+        (keyup)="keyHasBeenPressed($event)"
+        (cancel)="userPressedCancel()">
+      </ion-searchbar>
+      <br />
+      <b secondary text-center [hidden]="!category || keyword">CATEGORIE: {{category}}</b>
+      <b secondary text-center [hidden]="!keyword">CATEGORIE: {{keyword}}</b>
+    </ion-list-header>
+
+    <!-- Spinning icon when loading -->
+    <p bluegray text-center [hidden]="response">
+      Chargement...
+      <ion-spinner icon="spiral"></ion-spinner>
+    </p>
+
+
+    <ion-item>
+      <button ion-item *ngFor="let obj of response" (click)="itemTapped($event, obj)">
+
+        <ion-avatar item-left >
+          <img src="{{obj.images[0].src}}"/>
+        </ion-avatar>
+
+        <p bluegray><b>{{obj.title}}</b></p>
+
+        <div class="item-note" item-right>
+          <b>{{obj.price}} €</b>
+        </div>
+        <p>N°Article: {{obj.id}}</p>
+      </button>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>

@@ -1,0 +1,46 @@
+<ion-header>
+ <ion-navbar primary>
+   <button menuToggle>
+     <ion-icon name="menu"></ion-icon>
+   </button>
+   <ion-title text-center>
+       <img text-center src="img/logoLuenceTransparentHeader.png" style="max-height: 55px; padding: 5px;">
+   </ion-title>
+   <ion-buttons end>
+     <button (click)="openBasket()">
+       <ion-icon name="md-basket"></ion-icon>
+       <ion-badge>{{totalItems}}</ion-badge>
+     </button>
+   </ion-buttons>
+ </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <!-- Spinning icon when loading -->
+  <p bluegray text-center [hidden]="response">
+    Chargement...
+    <ion-spinner icon="spiral"></ion-spinner>
+  </p>
+  <!-- <p>{{response | json}}</p> -->
+  <ion-list [hidden]="!response" class="maxWidth">
+
+    <ion-list-header text-center>
+      <h2 primary text-center text-uppercase>
+        <ion-icon name="list"></ion-icon> Categories</h2>
+      <button small (click)="goToWooPage()">Voir tous les articles</button>
+    </ion-list-header>
+
+    <button ion-item
+      *ngFor="let category of response"
+      (click)="viewProdutsFromCat($event, category.slug)">
+      <ion-avatar item-left>
+        <img src="{{category.image}}"/>
+      </ion-avatar>
+      <h2>{{category.name}}</h2>
+      <p>{{category.description}}</p>
+    </button>
+
+  </ion-list>
+  
+</ion-content>

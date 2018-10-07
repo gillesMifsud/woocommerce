@@ -1,0 +1,77 @@
+<ion-header>
+ <ion-navbar primary>
+   <button menuToggle>
+     <ion-icon name="menu"></ion-icon>
+   </button>
+   <ion-title text-center>
+       <img text-center src="img/logoLuenceTransparentHeader.png" style="max-height: 55px; padding: 5px;">
+   </ion-title>
+ </ion-navbar>
+</ion-header>
+
+<ion-content padding class="customers">
+
+  <!-- <p>
+    {{response | json}}
+  </p> -->
+  <ion-list [hidden]="!response" class="maxWidth">
+
+    <button padding (click)="close()">Annuler</button>
+
+    <ion-list-header text-center>
+      <h2 primary text-center text-uppercase>
+        <ion-icon name="person"></ion-icon> Modifier mon Compte</h2>
+      <p secondary>
+        {{response?.username}} - IdUser N°{{response?.id}}
+      </p>
+    </ion-list-header>
+
+      <form 
+        [formGroup]="modifyForm" 
+        (submit)="onSubmit(response?.id, modifyForm.value)">
+
+        <ion-item>
+          <ion-label>Prénom:</ion-label>
+          <ion-input [formControl]="first_name" type="text" value="{{response?.first_name}}"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Nom:</ion-label>
+          <ion-input [formControl]="last_name" type="text" value="{{response?.last_name}}"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Email:</ion-label>
+          <ion-input [formControl]="email" type="text" value="{{response?.email}}"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Société:</ion-label>
+          <ion-input [formControl]="company" type="text" value="{{response?.shipping_address?.company}}"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Adresse:</ion-label>
+          <ion-textarea [formControl]="address_1" type="text" value="{{response?.shipping_address?.address_1}}"></ion-textarea>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Code postal:</ion-label>
+          <ion-input [formControl]="postcode" type="text" value="{{response?.shipping_address?.postcode}}"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Ville:</ion-label>
+          <ion-input [formControl]="city" type="text" value="{{response?.shipping_address?.city}}"></ion-input>
+        </ion-item>
+
+        <br />
+
+        <div style="width:60%; margin:auto">
+          <button block padding type="submit">Modifier mes coordonnées</button>
+        </div>
+
+      </form>
+
+    </ion-list>
+</ion-content>

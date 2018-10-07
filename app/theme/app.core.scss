@@ -1,0 +1,31 @@
+// http://ionicframework.com/docs/v2/theming/
+
+
+// App Shared Imports
+// --------------------------------------------------
+// These are the imports which make up the design of this app.
+// By default each design mode includes these shared imports.
+// App Shared Sass variables belong in app.variables.scss.
+
+@import "../pages/home/home.scss";
+@import "../pages/search/search.scss";
+@import "../pages/item-details/item-details.scss";
+@import "../pages/about/about.scss";
+@import "../pages/wordpress/wordpress.scss";
+@import "../pages/settings/settings.scss";
+@import "../pages/gallery/gallery.scss";
+@import "../pages/form/form.scss";
+@import "../pages/ecommerce/woo/woo.scss";
+@import "../pages/list/list.scss";
+@import "../pages/quizz/topics.scss";
+@import "../pages/ecommerce/woodetail/woodetail.scss";
+@import "../pages/ecommerce/wooorder/wooorder.scss";
+@import "../pages/ecommerce/login/login.scss";
+@import "../pages/ecommerce/register/register.scss";
+@import "../pages/ecommerce/basket/basket.scss";
+@import "../pages/ecommerce/shipandpay/shipandpay.scss";
+
+.maxWidth {
+  max-width: 600px;
+  margin: auto;
+}

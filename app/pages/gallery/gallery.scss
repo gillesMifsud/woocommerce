@@ -1,0 +1,32 @@
+/*.swiper-pagination{
+  bottom: 50px;
+}*/
+
+.swiper-pagination-bullet {
+  background: #FFFFFF;
+}
+
+.slidetext{
+  text-transform: uppercase;
+  color: white;
+  width: 80%;
+  line-height: 4rem;
+  margin: auto;
+  border-radius: 4px;
+  top: 50px;
+  background-color:rgba(0,0,0,0.1);
+}
+
+.responsive{
+  max-width: 500px;
+  margin: auto;
+}
+
+.hide{
+  display: block!important;
+}
+
+// .slideImg{
+//   min-height: 550px;
+//   object-fit: cover;
+// }

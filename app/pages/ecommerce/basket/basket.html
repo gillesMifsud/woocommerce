@@ -1,0 +1,64 @@
+<ion-header>
+ <ion-navbar primary>
+   <button menuToggle>
+     <ion-icon name="menu"></ion-icon>
+   </button>
+   <ion-title text-center>
+       <img text-center src="img/logoLuenceTransparentHeader.png" style="max-height: 55px; padding: 5px;">
+   </ion-title>
+   <ion-buttons end>
+     <button>
+       <ion-icon name="md-basket"></ion-icon>
+       <ion-badge>{{totalItems}}</ion-badge>
+     </button>
+   </ion-buttons>
+ </ion-navbar>
+</ion-header>
+
+<ion-content padding class="basket">
+
+  <ion-list class="maxWidth">
+    <ion-list-header text-center>
+      <h2 primary text-center text-uppercase>
+        <ion-icon name="md-basket"></ion-icon> Mon Panier</h2>
+    </ion-list-header>
+
+    <!-- Hidden if rowid db has entry  -->
+    <div [hidden]="hasProducts">
+      <br />
+      <h3 primary text-center text-uppercase>Panier vide!</h3>
+      <br />
+      <button block primary style="width: 60%; margin:0 auto" (click)="goToContinue()">Ajoutez des articles</button>
+    </div>
+
+    <ion-item [hidden]="!hasProducts">
+      <button block default class="customButton" (click)="goToOrder()">Commander</button>
+      <button block default class="customButton" (click)="goToContinue()">Continuer</button>
+      <button block default class="customButton" danger (click)="deleteBasket()">SUPPRIMER LE PANIER</button>
+    </ion-item>
+
+    <ion-item *ngFor="let item of basketItems">
+
+      <ion-avatar item-left >
+        <img src="{{item.articlePicture}}"/>
+      </ion-avatar>
+
+      <!-- item.rowid = id autoincrement from db -->
+      <button item-right class="deleteButton" (click)="remove(item.rowid)">
+        <ion-icon name="md-trash"></ion-icon>
+      </button>
+
+      <p bluegray><b>{{item.articleName}}</b></p>
+
+      <!-- <p>ROWID: {{item.rowid}}</p> -->
+
+      <div>
+        <p item-left>Quantité: {{item.quantity}} | Prix: <b>{{item.articlePrice}} €</b></p>
+      </div>
+
+      <p secondary>N°Article: {{item.articleNumber}}</p>
+      <!-- <p>Date d'ajout: {{item.createdAt | dateString:"MM/dd/yy"}}</p> -->
+
+    </ion-item>
+  </ion-list>
+</ion-content>

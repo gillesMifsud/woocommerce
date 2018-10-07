@@ -1,0 +1,51 @@
+.woodetail {
+  .orderButton{
+    width: 70%;
+    margin:auto;
+    text-transform: uppercase;
+  }
+
+  .addButton{
+    width: 40px;
+    height: 40px;
+    margin: 5px auto;
+  }
+
+  .centered{
+    width: 70%;
+    float:none;
+    margin: 0px auto;
+    padding: 0px;
+  }
+
+  ion-label{
+    margin-right: 0px!important;
+  }
+
+  .item-inner{
+    padding-right: 0px;
+  }
+
+  .height{
+    line-height: 25px;
+    text-align: left;
+  }
+
+  .imgDemi{
+    width: 49.33%;
+    display: inline;
+  }
+
+  .divImg{
+    height:180px;
+    display: inline-block;
+  }
+
+  .textQuantity{
+    font-size: 1.8rem;
+    line-height: 50px;
+    float: left;
+    padding:0px;
+  }
+  
+}

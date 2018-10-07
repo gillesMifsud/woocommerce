@@ -1,0 +1,48 @@
+<ion-header>
+ <ion-navbar primary>
+   <button menuToggle>
+     <ion-icon name="menu"></ion-icon>
+   </button>
+   <ion-title text-center>
+       <img text-center src="img/logoLuenceTransparentHeader.png" style="max-height: 55px; padding: 5px;">
+   </ion-title>
+ </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <br />
+
+  <ion-card class="maxWidth">
+
+    <ion-card-header style="background-color: aliceblue;">
+      <ion-thumbnail item-left>
+        <img [src]="quizz.icon" alt="quizz">
+        <h2 text-right bluegray text-uppercase>
+          Quizz {{ quizz.title }}
+        </h2>
+      </ion-thumbnail>
+    </ion-card-header>
+
+    <ion-card-content>
+      <br/>
+
+      <div style="border-bottom: 1px solid aliceblue; padding:15px">
+        <p bluegray>
+          <b>{{ quizz.getQuestion() }}</b>
+        </p>
+      </div>
+      <br />
+      <ion-item radio-group  *ngFor="let choice of quizz.getChoices()">
+        <ion-label>
+          <p courant>{{ choice }}</p>
+        </ion-label>
+        <ion-radio (click)="onSubmit($event, choice)">
+          {{ choice }}
+        </ion-radio>
+      </ion-item>
+    </ion-card-content>
+
+  </ion-card>
+
+</ion-content>

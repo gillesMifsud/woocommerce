@@ -1,0 +1,21 @@
+<ion-header>
+ <ion-navbar primary>
+   <button menuToggle>
+     <ion-icon name="menu"></ion-icon>
+   </button>
+   <ion-title text-center>
+       <img text-center src="img/logoLuenceTransparentHeader.png" style="max-height: 55px; padding: 5px;">
+   </ion-title>
+ </ion-navbar>
+</ion-header>
+
+<ion-content padding class="wordpressdetail">
+    <ion-item class="maxWidth">
+      <h2  text-center>
+        <b bluegray [innerHTML]="obj.title.rendered | safe"></b>
+      </h2>
+      <p text-center primary>{{ obj.date  | dateString:"MM/dd/yy"}}</p>
+      <br />
+    </ion-item>
+    <p class="maxWidth" padding courant text-justify [innerHTML]="obj.content.rendered | safe"></p>
+</ion-content>

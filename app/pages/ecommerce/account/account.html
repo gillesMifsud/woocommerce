@@ -1,0 +1,96 @@
+<ion-header>
+ <ion-navbar primary>
+   <button menuToggle>
+     <ion-icon name="menu"></ion-icon>
+   </button>
+   <ion-title text-center>
+       <img text-center src="img/logoLuenceTransparentHeader.png" style="max-height: 55px; padding: 5px;">
+   </ion-title>
+   <ion-buttons end>
+     <button (click)="openBasket()">
+       <ion-icon name="md-basket"></ion-icon>
+       <ion-badge>{{totalItems}}</ion-badge>
+     </button>
+   </ion-buttons>
+ </ion-navbar>
+</ion-header>
+
+<ion-content padding class="account">
+
+  <ion-refresher (ionRefresh)="doRefresh($event)" style="margin-top: 10px">
+    <ion-refresher-content primary
+      pullingIcon="arrow-dropdown"
+      pullingText="Tirer pour actualiser"
+      refreshingSpinner="circles"
+      refreshingText="Actualisation...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <!-- Spinning icon when loading -->
+  <p bluegray text-center [hidden]="response">
+    Chargement...
+    <ion-spinner icon="spiral"></ion-spinner>
+  </p>
+
+  <ion-list [hidden]="!response" class="maxWidth">
+    <ion-list-header text-center>
+      <h2 primary text-center text-uppercase>
+        <ion-icon name="person"></ion-icon> Mon Compte
+      </h2>
+      <img style="border-radius: 3px;" src="{{response?.avatar_url}}"/>
+      <p>
+        <b secondary>
+          {{response?.username}}
+        </b>
+      </p>
+
+      <div padding>
+        <button block default (click)="logout()">Deconnexion <ion-icon name="md-log-out"></ion-icon></button>
+      </div>
+    </ion-list-header>
+
+    <ion-item>
+      <h2>Prénom:</h2>
+      <p>{{response?.first_name}}</p>
+    </ion-item>
+
+    <ion-item>
+      <h2>Nom:</h2>
+      <p>{{response?.last_name}}</p>
+    </ion-item>
+
+    <ion-item>
+      <h2>Email:</h2>
+      <p>{{response?.email}}</p>
+    </ion-item>
+
+    <ion-item [hidden]="!response?.shipping_address?.company">
+      <h2>Société:</h2>
+      <p>{{response?.shipping_address?.company}}</p>
+    </ion-item>
+
+    <ion-item>
+      <h2>Adresse:</h2>
+      <p>{{response?.shipping_address?.address_1}}</p>
+      <p>{{response?.shipping_address?.postcode}}</p>
+      <p>{{response?.shipping_address?.city}}</p>
+    </ion-item>
+
+    <ion-item *ngIf="response?.last_order_id" >
+      <!-- OrderbyId() -->
+        <p primary>Dernière commande :
+          N°{{response?.last_order_id}}
+        </p>
+        <em primary>Du {{response?.last_order_date  | dateString:"MM/dd/yy"}}</em>
+        <div style="float:right;">
+          <button outline (click)="openLastOrder(response?.last_order_id)">Détail</button>
+        </div>
+    </ion-item>
+
+    <div padding>
+      <button padding block (click)="openModifyCustomer(response?.email)">Modifier mon compte</button>
+      <button padding block danger (click)="deleteAccountConfirm(response?.id)">Supprimer mon compte</button>
+    </div>
+
+  </ion-list>
+</ion-content>

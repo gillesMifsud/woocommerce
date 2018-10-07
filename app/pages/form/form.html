@@ -1,0 +1,176 @@
+<ion-header>
+  <ion-navbar primary>
+    <button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title text-center>
+      <img text-center src="img/logoLuenceTransparentHeader.png" style="max-height: 55px; padding: 5px;">
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="form">
+
+  <ion-list class="maxWidth">
+
+    <ion-list-header text-uppercase text-center>
+      <h2 primary><ion-icon name="mail">
+        </ion-icon> Contacter Luence
+      </h2>
+    </ion-list-header>
+
+    <br/>
+    <!-- ngFormModel directive : bind to property of compenent that represent the ControlGroup -->
+    <form 
+      [formGroup]="contactForm" 
+      (ngSubmit)="onSubmit(contactForm.value)" method="post">
+
+
+      <!-- Comment etes vous arrivés ici -->
+      <ion-item>
+        <ion-label>* Comment êtes-vous arrivés ici?</ion-label>
+        <ion-select [formControl]="arrivee" required>
+          <ion-option *ngFor="let arrivee of arrivees" value="{{ arrivee.label }}">
+            {{ arrivee.label }}
+          </ion-option>
+        </ion-select>
+      </ion-item>
+      <!-- <br/> -->
+
+      <!-- Mon projet -->
+      <ion-item>
+        <ion-label>* Votre Projet</ion-label>
+        <ion-select [formControl]="projet" required>
+          <ion-option *ngFor="let projet of projets" value="{{ projet.label }}">
+            {{ projet.label }}
+          </ion-option>
+        </ion-select>
+      </ion-item>
+
+      <!-- Organisation -->
+      <ion-item>
+        <ion-label>
+          <span [class.error-star]="!company.valid && company.touched">* </span>Organisation</ion-label>
+          <ion-input name="arrivee" type="text" value="" [formControl]="company" ></ion-input>
+        </ion-item>
+        <!-- Erreurs -->
+        <div>
+          <p *ngIf="company.hasError('required') && company.touched"
+          class="error-box">
+          * Champ requis!
+        </p>
+        <p *ngIf="company.hasError('minlength') && company.touched"
+        class="error-box">
+        * L'organisation doit comporter plus de 3 caractères!
+      </p>
+    </div>
+
+
+    <!-- Nom -->
+    <!-- Model-driven-form  -->
+    <!-- [ngFormControl]="name" : associate input field to the control object   -->
+    <ion-item>
+      <ion-label>
+        <span [class.error-star]="!name.valid && name.touched">* </span>Nom</ion-label>
+        <ion-input type="text" value="" [formControl]="name"></ion-input>
+      </ion-item>
+      <!-- Errors generated depending on input state: dirty, touched, etc... -->
+      <div>
+        <p *ngIf="name.hasError('required') && name.touched"
+        class="error-box">* Nom requis!
+      </p>
+      <p *ngIf="name.hasError('minlength') && name.touched"
+      class="error-box">* Le nom doit comporter plus de 3 caractères!
+    </p>
+    <p *ngIf="name.hasError('checkFirstCharacterValidator') && name.touched"
+    class="error-box">* Les noms ne peuvent commencer par un chiffre!
+    </p>
+    </div>
+
+
+    <!-- Prénom : PAS Obligatoire-->
+    <ion-item>
+      <ion-label>  Prénom</ion-label>
+      <ion-input type="text" value="" [formControl]="prenom" ></ion-input>
+    </ion-item>
+    <!-- Errors -->
+    <div [class.error]="!prenom.valid">
+      <p *ngIf="prenom.hasError('minlength')"
+      class="error-box">
+      * Le prénom doit comporter plus de 3 caractères!
+    </p>
+    <p *ngIf="prenom.hasError('checkFirstCharacterValidator')"
+    class="error-box">
+    * Un prénom ne peut commencer par un chiffre!
+    </p>
+    </div>
+
+
+    <!-- Telephone -->
+    <ion-item>
+      <ion-label>
+        <span [class.error]="!phone.valid && phone.touched">* </span>Telephone</ion-label>
+        <ion-input type="tel" value="" [formControl]="phone"
+        pattern="^(?:0|\(?\+33\)?\s?|0033\s?)[1-79](?:[\.\-\s]?\d\d){4}$">
+      </ion-input>
+    </ion-item>
+    <!-- Errors -->
+    <div>
+      <p *ngIf="phone.hasError('required') && phone.touched"
+      class="error-box">* Téléphone requis!
+    </p>
+    <p *ngIf="phone.hasError('minlength') && phone.touched"
+    class="error-box">* Le téléphone doit comporter au moins 10 caractères!
+    </p>
+    <p *ngIf="phone.hasError('pattern') && phone.touched"
+    class="error-box">* Numéro invalide!
+    </p>
+    </div>
+
+
+    <!-- Email -->
+    <ion-item>
+      <ion-label>
+        <span [class.error]="!email.valid && email.touched">* </span>Email</ion-label>
+        <ion-input type="mail" value="" [formControl]="email"
+        pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+      </ion-input>
+    </ion-item>
+    <!-- Errors -->
+    <div>
+      <p *ngIf="email.hasError('required') && email.touched"
+      class="error-box">* Email requis!
+    </p>
+    <!-- Pattern error coming from the input (template-driven-form : from the HTML) -->
+    <p *ngIf="email.hasError('pattern') && email.touched"
+    class="error-box">* Format Email invalide!
+    </p>
+    </div>
+
+    <!-- Message -->
+    <ion-item>
+      <ion-label stacked>
+        <span [class.error-star]="!message.valid && message.touched">* </span>Message</ion-label>
+        <ion-textarea type="text" value="" [formControl]="message"></ion-textarea>
+      </ion-item>
+      <!-- Erreurs -->
+      <div>
+        <p *ngIf="message.hasError('required') && message.touched"class="error-box">
+          * Champ requis!
+        </p>
+        <p *ngIf="message.hasError('minlength') && message.touched"
+        class="error-box">
+        * Le message doit comporter plus de 20 caractères!
+      </p>
+    </div>
+
+    <br/>
+
+    <div style="width:75%; margin: 0 auto">
+      <button padding type="submit" [disabled]="!contactForm.valid" block>Envoyer</button>
+    </div>
+
+    </form>
+  </ion-list>
+</ion-content>
